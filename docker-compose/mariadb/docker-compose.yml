@@ -1,0 +1,19 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "${DB_PORT}:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+    volumes:
+      - ${DATA_PATH}conf.d:/etc/mysql/conf.d
+      - ${DATA_PATH}/data:/var/lib/mysql
+      - ${DATA_PATH}/initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      TZ: Asia/Seoul
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
